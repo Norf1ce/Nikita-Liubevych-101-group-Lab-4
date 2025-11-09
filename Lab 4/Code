@@ -1,0 +1,55 @@
+#include <stdio.h>
+
+int main() {
+    int A[400], B[200], C[600];
+    int n, m, i, j, k = 0; 
+    int found;
+
+    printf("Введiть кiлькiсть елементiв масиву A (до 400): ");
+    scanf("%d", &n);
+    printf("Введiть елементи масиву A:\n");
+    for (i = 0; i < n; i++)
+        scanf("%d", &A[i]);
+
+    printf("Введiть кiлькiсть елементiв масиву B (до 200): ");
+    scanf("%d", &m);
+    printf("Введiть елементи масиву B:\n");
+    for (i = 0; i < m; i++)
+        scanf("%d", &B[i]);
+
+    // Елементи з A, яких нема у B
+    for (i = 0; i < n; i++) {
+        found = 0;
+        for (j = 0; j < m; j++) {
+            if (A[i] == B[j]) {
+                found = 1;
+                break;
+            }
+        }
+        if (!found)
+            C[k++] = A[i];
+    }
+
+    // Елементи з B, яких нема у A
+    for (i = 0; i < m; i++) {
+        found = 0;
+        for (j = 0; j < n; j++) {
+            if (B[i] == A[j]) {
+                found = 1;
+                break;
+            }
+        }
+        if (!found)
+            C[k++] = B[i];
+    }
+
+    // Вивід результату по 5 чисел у рядку
+    printf("\nСиметрична рiзниця (A\\B U B\\A):\n");
+    for (i = 0; i < k; i++) {
+        printf("%5d", C[i]);
+        if ((i + 1) % 5 == 0)
+            printf("\n");
+    }
+
+    return 0;
+}
